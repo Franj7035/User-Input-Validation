@@ -1,0 +1,89 @@
+<!-- Francisco Jair Hernandez Sanchez -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Information Form</title>
+    <style>
+        body {
+            background-color: aquamarine;
+            font-family: 'Times New Roman', Times, serif;
+            text-align: center;
+            padding: 50px;
+        }
+        h1 {
+            color: black;
+        }
+        input {
+            padding: 10px; 
+            font-size: 16px; 
+            border: 2px solid #000; 
+            border-radius: 5px; 
+            margin: 10px;
+        }
+        button {
+            padding: 10px 20px; 
+            font-size: 16px; 
+            margin-top: 20px; 
+            border: none; 
+            border-radius: 5px; 
+            cursor: pointer; 
+            background-color: black; 
+            color: white; 
+        }
+        button:hover {
+            background-color: azure; 
+        }
+        .error {
+            color: red;
+            font-weight: bold;
+        }
+        .success {
+            color: black;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>User Information Form</h1>
+    <p>Please enter your details below:</p>
+    
+    <form id="userForm">
+        <input type="text" id="firstName" placeholder="First Name" required><br>
+        <input type="text" id="lastName" placeholder="Last Name" required><br>       
+        <input type="text" id="zipCode" placeholder="Zip Code (5 digits)" required><br>
+        <button type="button" onclick="validateForm()">Submit</button>
+        <p id="message"></p>
+    </form>
+
+    <p id="secretMessage" style="display:none;" class="success">Congratulations! You have successfully entered valid information.</p>
+
+    <script>
+        function validateForm() {
+            const firstName = document.getElementById('firstName').value;
+            const lastName = document.getElementById('lastName').value;
+            const zipCode = document.getElementById('zipCode').value;
+            const fullName = firstName + " " + lastName;
+            const message = document.getElementById('message');
+            message.innerHTML = '';  
+
+            if (fullName.length > 20) {
+                message.innerHTML = 'Full name cannot exceed 20 characters.';
+                message.className = 'error';
+                return; 
+            }
+
+            const zipCodePattern = /^\d{5}$/;  
+            if (!zipCodePattern.test(zipCode)) {
+                message.innerHTML = 'Please enter a valid 5-digit zip code.';
+                message.className = 'error';
+                return;  
+            }
+            document.getElementById('secretMessage').style.display = 'block';
+            message.innerHTML = 'Form submitted successfully!';
+            message.className = 'success';
+        }
+    </script>
+</body>
+</html>
